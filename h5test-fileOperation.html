@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+        <title>my page</title>
+    </head>
+    <body>
+        <input type="file" name="test" id="fileTest" multep/>
+        <input type="button" id="readAsImage" value="readAsImage" onclick="showDataByUrl();"/>
+        <input type="button" id="readAsBinaryString" value="readAsBinaryString" onclick="showDataByBinaryString();"/>
+        <input type="button" id="readAsText" value="readAsText" onclick="showDataByText();"/>
+        <div id="result"></div>
+
+    </form>
+
+
+    </body>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript">
+		
+            if(typeof(FileReader) == "undefined"){
+            	alert("Your broswer sucks!");
+            }
+
+            function showDataByUrl(){
+            	var resultFile = document.getElementById('fileTest').files[0];
+            	if(resultFile){
+            		var reader = new FileReader();
+            		reader.readAsDataURL(resultFile);
+            		reader.onload = function(e){
+            			var urlData = this.result;
+            			document.getElementById("result").innerHTML += '<img src="'+urlData+'" alt="'+result.fileName+'">';
+            		}
+            	}
+            }
+
+            function showDataByBinaryString(){
+            	var resultFile = document.getElementById('fileTest').files[0];
+            	if(resultFile){
+            		var reader = new FileReader()
+            		reader.readAsBinaryString(resultFile);
+            		reader.onload = function(e){
+            			var binaryString = this.result;
+            			document.getElementById("result").innerHTML += binaryString;
+            		}
+            	}
+            }
+        	
+        	function showDataByText(){
+            	var resultFile = document.getElementById('fileTest').files[0];
+            	if(resultFile){
+            		var reader = new FileReader()
+            		reader.readAsText(resultFile);
+            		reader.onload = function(e){
+            			var text = this.result;
+            			document.getElementById("result").innerHTML += text;
+            		}
+            	}
+            }
+
+	</script>
+</html>
